@@ -5,8 +5,7 @@ export const loginRequest = ({username, email, password}) => ({
   payload: { username, email, password },
 });
 
-// Add more actions as needed
-export const registerRequest = (username, email, password) => ({
+export const registerRequest = ({username, email, password}) => ({
   type: REGISTER_REQUEST,
   payload: { username, email, password },
 });

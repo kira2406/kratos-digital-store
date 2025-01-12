@@ -33,11 +33,31 @@ const authSlice = createSlice({
         logOut: (state) => {
             state.user = null
             state.token = null
-        }
+        },
+        registerRequest: (state) => {
+            state.loading = true
+            state.error = ""
+        },
+        registerSuccess: (state) => {
+            state.loading = false
+            state.error = ""
+        },
+        registerFailure: (state, action) => {
+            state.loading = false,
+            state.error = action.payload
+        },
     }
 })
 
-export const {loginRequest, loginSuccess, loginFailure, logOut} = authSlice.actions
+export const {
+    loginRequest,
+    loginSuccess,
+    loginFailure,
+    logOut,
+    registerRequest,
+    registerSuccess,
+    registerFailure
+} = authSlice.actions
 
 export default authSlice.reducer
 

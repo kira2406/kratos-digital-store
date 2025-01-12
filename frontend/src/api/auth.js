@@ -10,9 +10,9 @@ export const loginUserApi = async (payload) => {
     }
 }
 
-export const registerUserApi = async (username,email, password) => {
+export const registerUserApi = async (payload) => {
     try{
-        const response = await axios.post('http://localhost:3000/api/auth/register',{username,email, password})
+        const response = await axios.post('http://localhost:3000/api/auth/register',payload)
         return response.data
     } catch(error){
         throw new Error(error.response.data.message || 'An error occurred during register')
