@@ -1,19 +1,27 @@
 import { configureStore } from "@reduxjs/toolkit";
 import createSagaMiddleware from "redux-saga";
-import authReducer from '../features/auth/authSlice'
-import notificationReducer from '../features/notification/notificationSlice'
 import rootSaga from "../sagas";
+import { persistStore } from "redux-persist";
+import persistedReducer from "./persistedRootReducer";
 
+// create saga middleware
 const sagaMiddleware = createSagaMiddleware();
 
-const store = configureStore({
-    reducer:{
-        auth: authReducer,
-        notification: notificationReducer
-    },
-    middleware: (getDefaultMiddleware) => {return getDefaultMiddleware().concat(sagaMiddleware)}
-})
+export const store = configureStore({
+    reducer: persistedReducer,
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware({
+        serializableCheck: {
+          ignoredActions: [
+            "persist/PERSIST",
+            "persist/REHYDRATE",
+          ], // Ignore these actions for serializability check
+        },
+      }).concat(sagaMiddleware),
+  });
 
+// run the root saga
 sagaMiddleware.run(rootSaga)
 
-export default store
+// create persistor for the store
+export const persistor = persistStore(store);
