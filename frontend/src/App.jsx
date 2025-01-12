@@ -6,7 +6,7 @@ import AppRouter from './routes/AppRouter';
 
 function App() {
 
-  const user = useSelector(state=> state.user)
+  const user = useSelector(state=> state.auth)
   console.log(user)
 
   return (
