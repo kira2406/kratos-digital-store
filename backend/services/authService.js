@@ -22,11 +22,20 @@ const authService = {
                 email,
                 password_hash: hashedPassword,
             });
+            
+            // Generate new token
+            const token = jwt.sign({
+                user_id: newUser.user_id,
+                username: newUser.username },
+                process.env.JWT_SECRET,
+                { expiresIn: '8h' }
+            );
 
             return {
                 user_id: newUser.user_id,
                 username: newUser.username,
-                email: newUser.email
+                email: newUser.email,
+                token: token
             };
         } catch (error) {
             throw error       
@@ -66,7 +75,10 @@ const authService = {
                 { expiresIn: '8h' }
             );
 
-            return token;
+            return {
+                user_id: user.user_id,
+                token: token
+            };
         } catch (error) {
             throw error;
         }

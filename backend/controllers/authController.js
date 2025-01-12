@@ -47,13 +47,14 @@ const authController = {
         }
 
         try {
-            const token = await authService.loginUser(params)
+            const {user_id, token} = await authService.loginUser(params)
             res.status(200).cookie('Authorization','Bearer '+token, {
                 expires: new Date(Date.now() + 8*3600000),
                 httpOnly: process.env.NODE_ENV === 'production',
                 secure: process.env.NODE_ENV === 'production',
             })
             .json({
+                user_id: user_id,
                 success:true,
                 message: 'Login successful',
                 token})

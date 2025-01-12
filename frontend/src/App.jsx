@@ -3,6 +3,8 @@ import React from 'react';
 import './App.css'
 import { useSelector } from 'react-redux';
 import AppRouter from './routes/AppRouter';
+import { CssBaseline, ThemeProvider} from '@mui/material';
+import { theme } from './theme/theme';
 
 function App() {
 
@@ -10,9 +12,10 @@ function App() {
   console.log(user)
 
   return (
-    <>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
       <AppRouter />
-    </>
+    </ThemeProvider>
   )
 }
 

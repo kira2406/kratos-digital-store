@@ -1,6 +1,8 @@
-import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { registerRequest } from '../../actions/authActions'
+import { selectUser } from '../../selectors/authSelectors'
+import { useNavigate } from 'react-router-dom'
 
 const Register = () => {
   const [username, setUsername] = useState("")
@@ -8,6 +10,9 @@ const Register = () => {
   const [email, setEmail] = useState("")
 
   const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  const isUser = useSelector(selectUser)
 
   const handleRegister = (e)=>{
     e.preventDefault()
@@ -19,6 +24,15 @@ const Register = () => {
     dispatch(registerRequest(payload))
 
   }
+
+  useEffect(() => {
+      if(isUser){
+        navigate("/")
+      }
+  
+  }, [isUser, navigate])
+
+
   return (
     <div><h1>Register</h1>
     <form onSubmit={handleRegister}>

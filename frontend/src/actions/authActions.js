@@ -1,11 +1,11 @@
 import { LOGIN_REQUEST, REGISTER_REQUEST } from "../constants/authTypes";
 
-export const loginRequest = ({username, email, password}) => ({
+export const loginRequest = (payload) => ({
   type: LOGIN_REQUEST,
-  payload: { username, email, password },
+  payload: payload,
 });
 
-export const registerRequest = ({username, email, password}) => ({
+export const registerRequest = (payload) => ({
   type: REGISTER_REQUEST,
-  payload: { username, email, password },
+  payload: payload,
 });

@@ -2,6 +2,7 @@ import { call, put, takeLatest } from "redux-saga/effects";
 import {loginFailure, loginSuccess, registerFailure, registerSuccess } from "../features/auth/authSlice";
 import { loginUserApi, registerUserApi } from "../api/auth";
 import { LOGIN_REQUEST, REGISTER_REQUEST } from "../constants/authTypes";
+import { addNotification } from "../features/notification/notificationSlice";
 
 function* loginSaga(action){
     try{
@@ -16,9 +17,21 @@ function* loginSaga(action){
 
         const data = yield call(loginUserApi, payload)
 
-        yield put(loginSuccess(data))
+        if (!data?.success){
+            throw new Error("Something went wrong")
+        }
+        
+        const modData = {
+            user: data.user_id,
+            token: data.token
+        }
+
+        yield put(loginSuccess(modData))
+
+        yield put(addNotification({ id: Date.now(), message: "Login successful!", type: "success" }));
 
         localStorage.setItem('jwtToken', data?.token)
+        // navigate('/')
 
     } catch(error){
         yield put(loginFailure(error?.message || 'Login Failed'))
@@ -38,7 +51,17 @@ function* registerSaga(action){
 
         const data = yield call(registerUserApi, payload)
 
-        yield put(registerSuccess(data))
+        if (!data?.success){
+            throw new Error("Something went wrong")
+        }
+        
+        const modData = {
+            user: data?.user?.user_id,
+            token: data?.user?.token,
+        }
+
+
+        yield put(registerSuccess(modData))
         
 
     } catch(error){
