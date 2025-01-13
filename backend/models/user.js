@@ -10,19 +10,33 @@ const User = sequelize.define('User', {
     username: {
         type: DataTypes.STRING,
         unique: true,
-        allowNull: false
+        allowNull: false,
+        validate: {
+            notEmpty: true // Ensure username is not an empty string
+        }
     },
     email: {
         type: DataTypes.STRING,
         unique: true,
-        allowNull: false
+        allowNull: false,
+        validate: {
+            isEmail: true // Validates that the value is a proper email format
+        }
     },
     password_hash: {
         type: DataTypes.TEXT,
-        allowNull: false
+        allowNull: false,
+        validate: {
+            notEmpty: true // Ensure password_hash is not an empty string
+        }
     },
     profile_picture_url: {
         type: DataTypes.TEXT
+    },
+    isPublisher: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+        allowNull: false
     }
 },
 {
