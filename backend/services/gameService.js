@@ -41,6 +41,19 @@ const gameService = {
             throw error;
         }
     },
+    getGames: async () => {
+        try{
+            const games = await Game.findAll({
+                limit: 5,
+                order: [['release_date', 'DESC']]
+            })
+            return games
+
+        }
+        catch (error) {
+            throw error;
+        }
+    }
 };
 
 module.exports = gameService;

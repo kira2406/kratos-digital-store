@@ -3,10 +3,13 @@ const gameController = require('../controllers/gameController')
 
 const router = express.Router()
 
-// User registration route
+// add new game
 router.post('/addGame', gameController.addGame)
 
-// User login route
+// get game details by Id
 router.post('/getGameById', gameController.getGameById)
+
+// get top five games
+router.get('/getTopFiveGames', gameController.getTopFiveGames)
 
 module.exports = router

@@ -2,6 +2,7 @@ import { combineReducers } from "@reduxjs/toolkit";
 import storage from "redux-persist/lib/storage";
 import authReducer from '../features/auth/authSlice'
 import notificationReducer from '../features/notification/notificationSlice'
+import gamesDataReducer from '../features/games/gameSlice'
 import persistReducer from "redux-persist/es/persistReducer";
 
 // create redux-persist configuration
@@ -13,7 +14,8 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
     auth: authReducer,
-    notification: notificationReducer
+    notification: notificationReducer,
+    gamesData: gamesDataReducer
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

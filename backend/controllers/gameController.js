@@ -44,6 +44,20 @@ const gameController = {
             res.status(401).json({success:false, message: error.message})
         }
 
+    },
+    getTopFiveGames: async (req, res) => {
+        try{
+            const games = await gameService.getGames()
+            res.status(200).json({
+                games: games,
+                success:true,
+            })
+        }
+        catch (error) {
+            console.error('Error fetching game details', error)
+            res.status(401).json({success:false, message: error.message})
+        }
+
     }
 }
 
