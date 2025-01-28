@@ -5,7 +5,7 @@ const Game = sequelize.define('Game', {
     game_id: {
         type: DataTypes.UUID,
         primaryKey: true,
-        defaultValue: DataTypes.UUIDV4
+        defaultValue: sequelize.literal('uuid_generate_v4()')
     },
     title: {
         type: DataTypes.STRING,

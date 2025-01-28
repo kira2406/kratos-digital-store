@@ -30,8 +30,8 @@ Category.belongsToMany(Game, { through: GameCategory, foreignKey: 'category_id' 
 Game.belongsToMany(Platform, { through: GamePlatform, foreignKey: 'game_id' });
 Platform.belongsToMany(Game, { through: GamePlatform, foreignKey: 'platform_id' });
 
-User.belongsToMany(Game, { through: UserGame });
-Game.belongsToMany(User, { through: UserGame });
+User.belongsToMany(Game, { through: UserGame , foreignKey: 'user_id'});
+Game.belongsToMany(User, { through: UserGame , foreignKey: 'game_id'});
 
 User.hasMany(CartItem, { foreignKey: "user_id" });
 CartItem.belongsTo(User, { foreignKey: "user_id" });

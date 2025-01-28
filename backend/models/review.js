@@ -5,7 +5,7 @@ const Review = sequelize.define('Review', {
     review_id: {
         type: DataTypes.UUID,
         primaryKey: true,
-        defaultValue: DataTypes.UUIDV4
+        defaultValue: sequelize.literal('uuid_generate_v4()')
     },
     user_id: {
         type: DataTypes.UUID,
@@ -42,7 +42,13 @@ const Review = sequelize.define('Review', {
     tableName: 'Reviews',
     timestamps: true,
     createdAt: 'created_at',
-    updatedAt: 'updated_at'
+    updatedAt: 'updated_at',
+    indexes: [
+        {
+            unique: true,
+            fields: ['user_id', 'game_id']  // Enforce uniqueness on the combination of user_id and game_id
+        }
+    ]
 });
 
 module.exports = Review;
