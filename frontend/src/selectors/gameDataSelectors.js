@@ -1,0 +1,1 @@
+export const selectTopFiveGamesData = (state) => state.gamesData.topFiveGames || [];
