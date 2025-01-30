@@ -1,8 +1,8 @@
 const {DataTypes} = require('sequelize')
 const sequelize = require('../config/sequelize_db')
 
-const CartItem = sequelize.define('CartItem', {
-    cartitem_id: {
+const Order = sequelize.define('Order', {
+    order_id: {
         type: DataTypes.UUID,
         primaryKey: true,
         defaultValue: sequelize.literal('uuid_generate_v4()')
@@ -17,32 +17,29 @@ const CartItem = sequelize.define('CartItem', {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
     },
-    game_id: {
-        type: DataTypes.UUID,
+    total_price: {
+        type: DataTypes.DECIMAL(10, 2),
         allowNull: false,
-        references: {
-            model: 'Games',
-            key: 'game_id'
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE'
+        validate: {
+            min: 1
+        }
     },
-    quantity: {
-        type: DataTypes.INTEGER,
+    status: {
+        type: DataTypes.TEXT,
         allowNull: false,
-        defaultValue: 1
+        defaultValue: "INITIATED"
     },
-    added_at: {
-        type: DataTypes.DATE,
-        defaultValue:
-        DataTypes.NOW
-    },
+    payment_method: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+        defaultValue: "CREDIT_CARD"
+    }
 },
 {
     timestamps: true,
     createdAt: 'created_at',
     updatedAt: 'updated_at',
-    tableName: 'CartItems'
+    tableName: 'Orders'
 });
 
-module.exports = CartItem
+module.exports = Order

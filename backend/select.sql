@@ -1,6 +1,12 @@
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
 select * from "Reviews"
 
 select * from "Games"
+
+select * from "Orders"
+
+select * from "OrderItems"
 
 select * from "Users"
 
@@ -20,4 +26,7 @@ select * from "CartItems"
 
 select * from "Wishlists"
 
--- DELETE FROM "UserGames"
+-- DELETE FROM "OrderItems"
+
+drop table "GamePlatforms"
+drop table "Wishlists"

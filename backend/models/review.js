@@ -11,7 +11,7 @@ const Review = sequelize.define('Review', {
         type: DataTypes.UUID,
         allowNull: false,
         references: {
-            model: 'Users', // Name of the Users table
+            model: 'Users',
             key: 'user_id'
         },
         onUpdate: 'CASCADE',
@@ -21,7 +21,7 @@ const Review = sequelize.define('Review', {
         type: DataTypes.UUID,
         allowNull: false,
         references: {
-            model: 'Games', // Name of the Users table
+            model: 'Games',
             key: 'game_id'
         },
         onUpdate: 'CASCADE',
@@ -46,7 +46,7 @@ const Review = sequelize.define('Review', {
     indexes: [
         {
             unique: true,
-            fields: ['user_id', 'game_id']  // Enforce uniqueness on the combination of user_id and game_id
+            fields: ['user_id', 'game_id']
         }
     ]
 });
