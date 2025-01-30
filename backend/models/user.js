@@ -5,7 +5,7 @@ const User = sequelize.define('User', {
     user_id: {
         type: DataTypes.UUID,
         primaryKey: true,
-        defaultValue: DataTypes.UUIDV4
+        defaultValue: sequelize.literal('uuid_generate_v4()')
     },
     username: {
         type: DataTypes.STRING,
@@ -33,7 +33,7 @@ const User = sequelize.define('User', {
     profile_picture_url: {
         type: DataTypes.TEXT
     },
-    isPublisher: {
+    is_publisher: {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
         allowNull: false

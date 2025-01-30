@@ -6,7 +6,7 @@ const Platform = sequelize.define('Platform', {
     platform_id: {
         type: DataTypes.UUID,
         primaryKey: true,
-        defaultValue: DataTypes.UUIDV4
+        defaultValue: sequelize.literal('uuid_generate_v4()')
     },
     name: {
         type: DataTypes.STRING,

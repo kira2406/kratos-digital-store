@@ -6,7 +6,7 @@ const GameCategory = sequelize.define('GameCategory', {
     game_category_id: {
         type: DataTypes.UUID,
         primaryKey: true,
-        defaultValue: DataTypes.UUIDV4
+        defaultValue: sequelize.literal('uuid_generate_v4()')
     },
     game_id: {
         type: DataTypes.UUID,

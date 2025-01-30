@@ -10,6 +10,17 @@ const Publisher = require('./publisher');
 const UserGame = require('./userGame');
 const CartItem = require('./cartItem');
 const Review = require('./review');
+const Order = require('./order')
+const OrderItem = require('./order_item')
+
+User.hasMany(Order, {foreignKey: 'user_id'})
+Order.belongsTo(User, {foreignKey: 'user_id'})
+
+Order.hasMany(OrderItem, {foreignKey: 'order_id'})
+OrderItem.belongsTo(Order, {foreignKey: 'order_id'})
+
+OrderItem.hasOne(Game, {foreignKey: 'game_id'})
+Game.belongsTo(OrderItem, {foreignKey: 'game_id'})
 
 // Associations
 User.hasMany(Wishlist, { foreignKey: 'user_id' });
@@ -30,8 +41,8 @@ Category.belongsToMany(Game, { through: GameCategory, foreignKey: 'category_id' 
 Game.belongsToMany(Platform, { through: GamePlatform, foreignKey: 'game_id' });
 Platform.belongsToMany(Game, { through: GamePlatform, foreignKey: 'platform_id' });
 
-User.belongsToMany(Game, { through: UserGame });
-Game.belongsToMany(User, { through: UserGame });
+User.belongsToMany(Game, { through: UserGame , foreignKey: 'user_id'});
+Game.belongsToMany(User, { through: UserGame , foreignKey: 'game_id'});
 
 User.hasMany(CartItem, { foreignKey: "user_id" });
 CartItem.belongsTo(User, { foreignKey: "user_id" });
@@ -45,4 +56,4 @@ Review.belongsTo(User, { foreignKey: 'user_id' });
 Game.hasMany(Review, { foreignKey: 'game_id' });
 Review.belongsTo(Game, { foreignKey: 'game_id' });
 
-module.exports = { sequelize, User, Game, Wishlist, Category, GameCategory,Publisher, Platform, GamePlatform };
+module.exports = { sequelize, User, Game, Wishlist, Category, GameCategory,Publisher, Platform, GamePlatform, Order, OrderItem };

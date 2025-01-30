@@ -5,7 +5,7 @@ const Game = sequelize.define('Game', {
     game_id: {
         type: DataTypes.UUID,
         primaryKey: true,
-        defaultValue: DataTypes.UUIDV4
+        defaultValue: sequelize.literal('uuid_generate_v4()')
     },
     title: {
         type: DataTypes.STRING,
@@ -18,11 +18,11 @@ const Game = sequelize.define('Game', {
         type: DataTypes.DECIMAL(10, 2),
         allowNull: false,
         validate: {
-            min: 0
+            min: 1
         }
     },
     discount: {
-        type: DataTypes.FLOAT, // Percentage (e.g., 0.10 for 10%)
+        type: DataTypes.FLOAT,
         validate: {
             min: 0,
             max: 1
@@ -34,7 +34,7 @@ const Game = sequelize.define('Game', {
     publisher_id: {
         type: DataTypes.STRING,
         references: {
-            model: 'Publishers', // Name of the Games table
+            model: 'Publishers',
             key: 'publisher_id'
         },
     },
@@ -44,6 +44,11 @@ const Game = sequelize.define('Game', {
             min: 0,
             max: 10
         }
+    },
+    reviews: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+        defaultValue: "Mixed"
     },
     created_at: {
         type: DataTypes.DATE,

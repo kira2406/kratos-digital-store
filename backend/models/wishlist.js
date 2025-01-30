@@ -5,13 +5,13 @@ const Wishlist = sequelize.define('Wishlist', {
     wishlist_id: {
         type: DataTypes.UUID,
         primaryKey: true,
-        defaultValue: DataTypes.UUIDV4
+        defaultValue: sequelize.literal('uuid_generate_v4()')
     },
     user_id: {
         type: DataTypes.UUID,
         allowNull: false,
         references: {
-            model: 'Users', // Name of the Users table
+            model: 'Users',
             key: 'user_id'
         },
         onUpdate: 'CASCADE',
@@ -21,7 +21,7 @@ const Wishlist = sequelize.define('Wishlist', {
         type: DataTypes.UUID,
         allowNull: false,
         references: {
-            model: 'Games', // Name of the Games table
+            model: 'Games',
             key: 'game_id'
         },
         onUpdate: 'CASCADE',

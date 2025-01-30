@@ -5,7 +5,7 @@ const UserGame = sequelize.define('UserGame', {
     user_game_id: {
         type: DataTypes.UUID,
         primaryKey: true,
-        defaultValue: DataTypes.UUIDV4
+        defaultValue: sequelize.literal('uuid_generate_v4()')
     },
     user_id: {
         type: DataTypes.UUID,
@@ -27,7 +27,11 @@ const UserGame = sequelize.define('UserGame', {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
     },
-    purchasedAt: { 
+    quantity: {
+        type: DataTypes.INTEGER,
+        defaultValue: 1
+    },
+    purchased_at: { 
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW
     }
