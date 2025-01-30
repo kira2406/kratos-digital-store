@@ -43,6 +43,7 @@ faker = Faker()
 
 # Function to create fake users
 def create_fake_users(num_users=10):
+    global i
     fake_users = []
     for _ in range(num_users):
         username = faker.user_name()
@@ -53,13 +54,14 @@ def create_fake_users(num_users=10):
         is_publisher = faker.boolean()
 
         fake_user = User(
-            username=username,
-            email=email,
+            username=username+str(i)+"a",
+            email=str(i)+"a"+email,
             password_hash=hashed_password.decode('utf-8'),
             profile_picture_url=profile_picture_url,
             is_publisher=False
         )
         fake_users.append(fake_user)
+        i += 1
 
     # bulk insert users into the database
     session.bulk_save_objects(fake_users)
@@ -68,10 +70,20 @@ def create_fake_users(num_users=10):
 
 
 
-
+i = 9500
 # Generate and insert 10 fake users
-create_fake_users(100)
-create_fake_users(75)
+create_fake_users(5000)
+create_fake_users(5000)
+create_fake_users(5000)
+create_fake_users(5000)
+create_fake_users(5000)
+create_fake_users(5000)
+create_fake_users(5000)
+create_fake_users(5000)
+create_fake_users(5000)
+create_fake_users(5000)
+create_fake_users(5000)
+create_fake_users(5000)
 # create_fake_users(100)
 # create_fake_users(100)
 # create_fake_users(100)
