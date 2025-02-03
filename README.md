@@ -4,10 +4,10 @@ Kratos Digital Store is an e-commerce platform for games, designed to manage and
 
 ### Key features include:
 
-📈Personalized Sales Forecasting: Incorporates LSTM models for dynamic sales prediction.
-🖥️Sales Data Management: Captures and processes sales data using an ETL pipeline.
-🎮Product Catalog: Organized by categories and game genres.
-🗿Backend & Deployment: The system is hosted on AWS, with the frontend deployed via Vercel for fast and scalable distribution.
+- 📈Personalized Sales Forecasting: Incorporates LSTM models for dynamic sales prediction.
+- 🖥️Sales Data Management: Captures and processes sales data using an ETL pipeline.
+- 🎮Product Catalog: Organized by categories and game genres.
+- 🗿Backend & Deployment: The system is hosted on AWS, with the frontend deployed via Vercel for fast and scalable distribution.
 
 # Sales Forecast ETL Pipeline (Airflow DAG)
 
