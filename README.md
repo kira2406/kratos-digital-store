@@ -1,5 +1,14 @@
 # kratos-digital-store
 
+Kratos Digital Store is an e-commerce platform for games, designed to manage and distribute digital game products efficiently. The system is built with a modern tech stack, leveraging React for the frontend and PostgreSQL for data management. The backend uses Sequelize ORM in Node.js server to manage database interactions, with Redux Toolkit for state management and Redux Saga for handling asynchronous operations like user authentication.
+
+### Key features include:
+
+📈Personalized Sales Forecasting: Incorporates LSTM models for dynamic sales prediction.
+🖥️Sales Data Management: Captures and processes sales data using an ETL pipeline.
+🎮Product Catalog: Organized by categories and game genres.
+🗿Backend & Deployment: The system is hosted on AWS, with the frontend deployed via Vercel for fast and scalable distribution.
+
 # Sales Forecast ETL Pipeline (Airflow DAG)
 
 ## Overview
