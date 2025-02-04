@@ -15,8 +15,5 @@ EXPOSE 5000
 
 COPY script/app.py /app/
 
-ENV AWS_ACCESS_KEY_ID=AKIAYXWBOCFHAWOHOS6Q
-ENV AWS_SECRET_ACCESS_KEY=2EJpJIFGvY9+zsT+l6fietwyJXWcMj5b07Ijpvz8
-
 # Set the default command to run the training script (you can replace train_script.py with your actual script name)
 CMD ["python", "app.py"]
