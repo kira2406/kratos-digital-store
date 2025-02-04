@@ -62,6 +62,10 @@ This Airflow DAG automates the process of training lstm model and storing the we
    - Train the LSTM model
    - Upload weights (`model_weights.h5`) and scalers to S3 bucket
 
+### DAG Flow
+
+![DAGS Running on airflow](images/airflow_train_lstm_screenshot.png)
+
 ## 3. Daily Sales Forecasting Pipeline
 
 ### Overview
@@ -78,6 +82,10 @@ This Airflow DAG automates the process of getting sales forecast from the traine
 3. **Store the forecasted sales**
    - Delete previously forecasted sales from `forecasted_sales` table
    - Insert the newly forecasted sales
+
+### DAG Flow
+
+![DAGS Running on airflow](images/airflow_forecasting_screenshot.png)
 
 # Docker
 Dockerizing a flask app that contains scripts for training and testing LSTM model
