@@ -199,6 +199,12 @@ with DAG(dag_id="sales_forecast_etl_pipeline",
                 df_time_series.fillna(0, inplace=True)
                 df_time_series = df_time_series.sort_values(by=['purchase_date'])
 
+                df_sales['purchase_date'] = pd.to_datetime(df_sales['purchase_date'])
+
+                df_sales['purchase_date'] = df_sales['purchase_date'].dt.date
+
+                df_sales['purchase_date'] = pd.to_datetime(df_sales['purchase_date'], errors='coerce')
+
                 # Save to local file
                 game_folder = os.path.join(LOCAL_STORAGE_PATH, f'game_{game_id}')
                 os.makedirs(game_folder, exist_ok=True)
