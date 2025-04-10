@@ -10,6 +10,9 @@ const sequelize = new Sequelize({
     database: process.env.DB_DATABASE_NAME,
     port: process.env.DB_PORT,
     logging: false, // Set to true to log SQL queries (optional)
+    dialectOptions: {
+        ssl: process.env.DB_SSL === 'true' ? { require: true, rejectUnauthorized: false } : false,
+    },
 });
 
 module.exports = sequelize;

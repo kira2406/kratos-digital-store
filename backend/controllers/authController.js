@@ -1,54 +1,52 @@
-const authService = require('../services/authService')
+const authService = require("../services/authService");
+const userService = require("../services/userService")
 
-const authController = {
-    // Handle user register
-    register: async (req, res) => {
-        const {username, email, password} = req.body;
+const register = async (req, res) => {
+  try {
+    const { email, password, username } = req.body;
+    const user = await authService.registerUser(email, password);
+    await userService.createUser(user?.uid, user?.email, username);
 
-        if (!username || !email || !password){
-            return res.status(400).json({success:false, message: "All fields are required"})
-        }
-        try {
-            const user = await authService.registerUser(username, email, password);
-            return res.status(201).json({success:true, message: 'User registered successfully!', user})
-            
-        } catch (error) {
-            console.error("Registration error", error);
-            return res.status(500).json({success:false, message: error.message})
-        }
-    },
-    login: async (req, res) => {
-        const {email, username, password} = req.body
+    const token = await user.getIdToken();
+    res.status(201).json({ success: true, user: user?.uid, token: token });
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
 
-        params = {
-            email: email,
-            username: username,
-            password: password
-        }
+const login = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const user = await authService.loginUser(email, password);
+    const token = await user.getIdToken();
+    res.status(200).json({ success: true, token: token , user: user?.uid});
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
 
-        if ((!email && !username) || !password){
-            return res.status(400).json({success: false, message: 'Email/Username and password are required'})
-        }
+const logout = async (req, res) => {
+  try {
+    await authService.logoutUser();
+    res.status(200).json({ success: true });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
 
-        try {
-            const {user_id, token} = await authService.loginUser(params)
-            res.status(200).cookie('Authorization','Bearer '+token, {
-                expires: new Date(Date.now() + 8*3600000),
-                httpOnly: process.env.NODE_ENV === 'production',
-                secure: process.env.NODE_ENV === 'production',
-            })
-            .json({
-                user_id: user_id,
-                success:true,
-                message: 'Login successful',
-                token})
-            
-        } catch (error) {
-            console.error('Login error', error)
-            res.status(401).json({success:false, message: error.message})
-            
-        }
-    }
+const verifyToken = async (req, res) => {
+  const token = req.headers.authorization?.split(" ")[1];
+  if (!token) {
+    return res.status(401).json({ message: "Unauthorized: No token provided" });
+  }
+
+  try {
+    const result = await authService.verifyTokenService(token);
+    return res.json(result);
+  } catch (error) {
+    return res.status(403).json({ valid: false, message: error.message });
+  }
+
 }
 
-module.exports = {authController}
+module.exports = { register, login, logout, verifyToken };

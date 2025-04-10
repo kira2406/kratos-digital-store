@@ -1,98 +1,71 @@
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const User = require('../models/user');
-const dotenv = require('dotenv');
-dotenv.config()
+const { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } = require('firebase/auth');
+const { admin,auth } = require('../config/firebase');
 
-const authService = {
-    // Register new user
-    registerUser: async (username, email, password) => {
-        try {
-            // Check if user already exists
-            const existingUser = await User.findOne({where: {email}});
-            if (existingUser) {
-                throw new Error('Email already in use');
-            }
-            // hash password
-            const hashedPassword = await bcrypt.hash(password, 10);
+// Register User
+const registerUser = async (email, password) => {
+  try {
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    const user = userCredential.user
+    return user
+  } catch (error) {
+    console.log("error", error.code)
+    let errorMessage = "Something went wrong."
 
-            // Save new user to database
-            const newUser = await User.create({
-                username,
-                email,
-                password_hash: hashedPassword,
-            });
-            
-            // Generate new token
-            const token = jwt.sign({
-                user_id: newUser.user_id,
-                username: newUser.username },
-                process.env.JWT_SECRET,
-                { expiresIn: '8h' }
-            );
+    switch (error?.code) {
+        case "auth/email-already-in-use":
+            errorMessage = "This email is already associated with an account."
+            break;
+        case "auth/invalid-email":
+            errorMessage = "The email address is not valid."
+            break;
+    
+        default:
+            errorMessage = "Something went wrong."
+            break;
+    }
+    throw new Error(errorMessage);
+  }
+};
 
-            return {
-                user_id: newUser.user_id,
-                username: newUser.username,
-                email: newUser.email,
-                token: token
-            };
-        } catch (error) {
-            throw error       
-        }
-    },
+// Login User
+const loginUser = async (email, password) => {
+  try {
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    const user = userCredential.user
+    return user;
+  } catch (error) {
+    let errorMessage = "Invalid Credentials."
 
-    // Login user
-    loginUser: async ({email, username, password}) => {
-        try {
-            // Check if email or username is provided
-            if (!email && !username) {
-                throw new Error('Email or Username is required');
-            }
-            let user;
-            // Try to find user by email
-            if (email) {
-                user = await User.findOne({ where: { email } });
-            }
-            // Try to find user by username
-            if (!user && username) {
-                user = await User.findOne({ where: { username } });
-            }
-            // If no user is found, return error
-            if (!user){
-                throw new Error('Invalid credentials');
-            }
-            // Compare password with hashed password
-            const isMatch = await bcrypt.compare(password, user.password_hash);
-            if (!isMatch) {
-                throw new Error('Invalid credentials');
-            }
-            // Generate JWT token
-            const token = jwt.sign({
-                user_id: user.user_id,
-                username: user.username },
-                process.env.JWT_SECRET,
-                { expiresIn: '8h' }
-            );
+    switch (error?.code) {
+        case "auth/invalid-credential":
+            errorMessage = "Invalid Credentials."
+            break;
+        default:
+            errorMessage = "Invalid Credentials."
+            break;
+    }
+    throw new Error(errorMessage);
+  }
+};
 
-            return {
-                user_id: user.user_id,
-                token: token
-            };
-        } catch (error) {
-            throw error;
-        }
-    },
-
-    // Validate JWT Token
-    validateToken: (token) => {
-        try {
-            const decoded = jwt.verify(token, process.env.JWT_SECRET);
-            return decoded;
-        } catch (error) {
-            throw new Error('Invalid or expired token');
-        }
+// Logout User
+const logoutUser = async () => {
+    try{
+        await signOut(auth);
+    }
+    catch(error) {
+        throw new Error("Logout Error: " + error.message);
     }
 };
 
-module.exports = authService;
+const verifyTokenService = async (token) => {
+  try {
+    const decodedToken = await admin.auth().verifyIdToken(token);
+    return { valid: true, uid: decodedToken.uid };
+  } catch (error) {
+    console.log("error", error)
+    throw new Error("Invalid token");
+  }
+};
+
+module.exports = { registerUser, loginUser, logoutUser, verifyTokenService };

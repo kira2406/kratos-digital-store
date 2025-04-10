@@ -32,7 +32,7 @@ const Game = sequelize.define('Game', {
         type: DataTypes.DATEONLY
     },
     publisher_id: {
-        type: DataTypes.STRING,
+        type: DataTypes.UUID,
         references: {
             model: 'Publishers',
             key: 'publisher_id'

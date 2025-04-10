@@ -1,12 +1,16 @@
-const express = require('express')
-const {authController} = require('../controllers/authController')
+const express = require("express")
+const authController = require("../controllers/authController");
+const { verifyToken } = require("../middlewares/authenticateJWT");
 
-const router = express.Router()
+const router = express.Router();
 
-// User registration route
-router.post('/register', authController.register)
+// Register route
+router.post("/register", authController.register)
+// Login route
+router.post("/login", authController.login)
+// Logout route
+router.post("/logout", verifyToken, authController.logout)
 
-// User login route
-router.post('/login', authController.login)
+router.post("/verifyToken", authController.verifyToken)
 
-module.exports = router
+module.exports = router;
