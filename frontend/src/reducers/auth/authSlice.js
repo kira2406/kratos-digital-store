@@ -2,7 +2,6 @@ import {createSlice} from "@reduxjs/toolkit"
 
 const initialState = {
     user: null,
-    token: null,
     loading: false,
     error: ""
 }
@@ -19,15 +18,22 @@ const authSlice = createSlice({
             state.loading = false
             state.error= ""
             state.user = action.payload.user
-            state.token = action.payload.token
+            localStorage.setItem("jwtToken", action.payload.token);
         },
         loginFailure: (state, action) => {
             state.loading = false,
             state.error = action.payload
         },
-        logOut: (state) => {
+        logoutRequest: (state) => {
+            state.loading = true
+        },
+        logoutSuccess: (state) => {
+            state.loading = false
             state.user = null
-            state.token = null
+        },
+        logoutFailure: (state, action) => {
+            state.loading = false
+            state.error = action.payload
         },
         registerRequest: (state) => {
             state.loading = true
@@ -37,7 +43,6 @@ const authSlice = createSlice({
             state.loading = false
             state.error = ""
             state.user = action.payload.user
-            state.token = action.payload.token
         },
         registerFailure: (state, action) => {
             state.loading = false,
@@ -50,7 +55,9 @@ export const {
     loginRequest,
     loginSuccess,
     loginFailure,
-    logOut,
+    logoutRequest,
+    logoutSuccess,
+    logoutFailure,
     registerRequest,
     registerSuccess,
     registerFailure

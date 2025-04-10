@@ -1,22 +1,18 @@
-const jwt = require('jsonwebtoken')
-const dotenv = require('dotenv')
-dotenv.config()
+const {admin} = require("../config/firebase");
 
-function authenticateJWT( req, res, next){
-    const token = req.header('Authorization')?.replace('Bearer ', '')
+const verifyToken = async (req, res, next) => {
+  const token = req.headers.authorization?.split(" ")[1];
+  if (!token) {
+    return res.status(401).json({ error: "Unauthorized" });
+  }
 
-    if (!token){
-        return res.status(401).json({message: 'Access denied. No token found.'})
-    }
+  try {
+    const decodedToken = await admin.auth().verifyIdToken(token);
+    req.user = decodedToken;
+    next();
+  } catch (error) {
+    return res.status(401).json({ error: "Invalid token" });
+  }
+};
 
-    try {
-        const decoded = jwt.verify(token, process.env.JWT_SECRET)
-        req.user = decoded
-        next()
-        
-    } catch (error) {
-        res.status(403).json({ message: 'Invalid or expired token' });
-    }
-}
-
-module.exports = authenticateJWT
+module.exports = {verifyToken};

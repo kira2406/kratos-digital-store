@@ -13,6 +13,11 @@ Kratos Digital Store is an e-commerce platform for games, designed to manage and
 
 ![ML Pipeline](images/pipeline.png)
 
+# Sales Forecast
+
+![Sample Prediction on one of the games](images/sample_prediction.png)
+Sample predictionon one of the game
+
 # Airflow DAG
 
 ## 1. Sales Forecast ETL Pipeline

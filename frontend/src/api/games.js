@@ -3,7 +3,6 @@ import axios from "axios";
 export const getTopFiveGamesApi = async (payload) => {
     try{
         const response = await axios.get('http://localhost:3000/api/game/getTopFiveGames',payload)
-        console.log("response", response)
 
         return response.data
     } catch(error){
