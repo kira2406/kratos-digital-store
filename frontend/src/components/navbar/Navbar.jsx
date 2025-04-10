@@ -3,10 +3,13 @@ import AppBar from "@mui/material/AppBar";
 import { alpha, Box, Button, InputBase, styled, Toolbar, Typography } from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "../../selectors/authSelectors";
+import {logoutRequest } from "../../reducers/auth/authSlice";
 
 const Navbar = () => {
+
+  const dispatch = useDispatch();
 
   const navigate = useNavigate()
 
@@ -17,6 +20,12 @@ const Navbar = () => {
   }
   const handleProfileClick = () => {
     navigate('/profile')
+  }
+
+  const handleLogoutClick = () => {
+    dispatch(logoutRequest())
+    localStorage.removeItem("token")
+    navigate('/')
   }
 
   const Search = styled('div')(({ theme }) => ({
@@ -84,7 +93,10 @@ const Navbar = () => {
           </Search>
           <Box sx={{ flexGrow: 1 }} />
           {currentuser ? 
-          <Button color="primary" variant="contained" onClick={handleProfileClick}>Profile</Button>:
+          <Box sx={{m:2}}>
+          <Button sx={{mr:1, ml:2}} color="primary" variant="contained" onClick={handleProfileClick}>Profile</Button>
+          <Button sx={{mr:1, ml:2}} color="primary" variant="contained" onClick={handleLogoutClick}>Logout</Button>
+          </Box>:
           <Button color="primary" variant="contained" onClick={handleLoginClick}>Login</Button>}
       </Toolbar>
     </AppBar>

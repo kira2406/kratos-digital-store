@@ -1,5 +1,5 @@
 import { call, put, takeLatest } from "redux-saga/effects";
-import {topFiveGameFailure, topFiveGameSuccess } from "../features/games/gameSlice";
+import {topFiveGameFailure, topFiveGameSuccess } from "../reducers/games/gameSlice";
 import { getTopFiveGamesApi } from "../api/games";
 import { TOP_FIVE_GAME_REQUEST } from "../constants/gameTypes";
 

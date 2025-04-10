@@ -1,37 +1,35 @@
 import { call, put, takeLatest } from "redux-saga/effects";
-import {loginFailure, loginSuccess, registerFailure, registerSuccess } from "../features/auth/authSlice";
-import { loginUserApi, registerUserApi } from "../api/auth";
-import { LOGIN_REQUEST, REGISTER_REQUEST } from "../constants/authTypes";
-import { addNotification } from "../features/notification/notificationSlice";
+import {loginFailure, loginRequest, loginSuccess, logoutRequest, registerRequest, registerFailure, registerSuccess, logoutSuccess, logoutFailure } from "../reducers/auth/authSlice";
+import { registerUserApi } from "../api/auth";
+import { addNotification } from "../reducers/notification/notificationSlice";
+import axiosInstance from "../utils/axiosInstance";
+import axios from "axios";
+
+const API_URL = import.meta.env.VITE_KRATOS_BACKEND_URL;
 
 function* loginSaga(action){
     try{
-        console.log(action)
-        const {username, email, password} = action.payload;
+        const {email, password} = action.payload;
 
         const payload = {
-            username: username,
             email: email,
             password: password
         }
 
-        const data = yield call(loginUserApi, payload)
+        const response = yield call(axios.post,`${API_URL}/api/auth/login`, payload)
 
-        if (!data?.success){
+        if (!response?.data?.success){
             throw new Error("Something went wrong")
         }
         
         const modData = {
-            user: data.user_id,
-            token: data.token
+            user: response?.data?.user,
+            token: response?.data?.token
         }
 
         yield put(loginSuccess(modData))
 
         yield put(addNotification({ id: Date.now(), message: "Login successful!", type: "success" }));
-
-        localStorage.setItem('jwtToken', data?.token)
-        // navigate('/')
 
     } catch(error){
         yield put(loginFailure(error?.message || 'Login Failed'))
@@ -40,7 +38,6 @@ function* loginSaga(action){
 
 function* registerSaga(action){
     try{
-        console.log(action)
         const {username, email, password} = action.payload;
 
         const payload = {
@@ -48,7 +45,7 @@ function* registerSaga(action){
             email: email,
             password: password
         }
-
+        
         const data = yield call(registerUserApi, payload)
 
         if (!data?.success){
@@ -56,8 +53,8 @@ function* registerSaga(action){
         }
         
         const modData = {
-            user: data?.user?.user_id,
-            token: data?.user?.token,
+            user: data?.user,
+            token: data?.token,
         }
 
 
@@ -69,9 +66,27 @@ function* registerSaga(action){
     }
 }
 
+function* logoutSaga(){
+    try{
+        
+        const response = yield call(axiosInstance.post, '/api/auth/logout')
+
+        if (!response?.data?.success){
+            throw new Error("Something went wrong")
+        }
+
+        yield put(logoutSuccess())
+        
+
+    } catch(error){
+        yield put(logoutFailure(error?.message || 'Logout Failed'))
+    }
+}
+
 function* authSaga(){
-    yield takeLatest(LOGIN_REQUEST, loginSaga),
-    yield takeLatest(REGISTER_REQUEST, registerSaga)
+    yield takeLatest(loginRequest.type, loginSaga),
+    yield takeLatest(registerRequest.type, registerSaga)
+    yield takeLatest(logoutRequest.type, logoutSaga)
 }
 
 export default authSaga;
