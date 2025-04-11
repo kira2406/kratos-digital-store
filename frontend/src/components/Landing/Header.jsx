@@ -13,7 +13,7 @@ const Header = () => {
     <Box sx={{ mt: 10 }}>
         
         <Box>
-        <Typography color='ashgray' variant="h5" sx={{paddingBottom: "10px"}}>FEATURED</Typography>
+        <Typography color='white' variant="h5" sx={{paddingBottom: "10px"}}>FEATURED</Typography>
         <Box>
           {featuredGameLoading && <Typography color="white">Loading...</Typography>}
           {featuredGameError && <Typography color="red">{featuredGameError}</Typography>}
