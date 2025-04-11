@@ -17,6 +17,7 @@ const GameLibraryCard = ({ game, loading }) => {
           boxShadow: 3,
           mb: 1,
           color: 'white',
+          alignItems: 'center'
         }}
       >
         {/* Thumbnail */}
@@ -99,7 +100,7 @@ const GameLibraryCard = ({ game, loading }) => {
         windows: PropTypes.bool.isRequired,
         mac: PropTypes.bool.isRequired,
         linux: PropTypes.bool.isRequired
-      }).isRequired,
+      }),
       loading: PropTypes.bool.isRequired
     };
 
