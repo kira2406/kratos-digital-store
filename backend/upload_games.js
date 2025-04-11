@@ -55,7 +55,7 @@ async function main() {
       await mongoose.connect(mongoURI);
       console.log('Connected to MongoDB');
 
-      const filePath = './output2.json'; // Specify the path to your JSON file
+      const filePath = './games_dump.json'; // Specify the path to your JSON file
       await uploadGamesFromFile(filePath); // Upload games data
   } catch (err) {
       console.log('Error connecting to MongoDB', err);
