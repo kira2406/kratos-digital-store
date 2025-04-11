@@ -1,9 +1,10 @@
 const mongoose = require("mongoose");
 
 const gameSchema = new mongoose.Schema({
-  _id: { type: String, required: true, unique: true },
+  _id: String,
   name: String,
-  release_date: String,
+  featured: { type: Boolean, default: false },
+  release_date: Date,
   required_age: Number,
   price: Number,
   dlc_count: Number,

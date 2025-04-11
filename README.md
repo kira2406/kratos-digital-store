@@ -1,5 +1,9 @@
 # kratos-digital-store
 
+![Kratos Landing Page](images/kratos_landing.png)
+![Kratos Landing Page 2](images/kratos_landing2.png)
+
+
 Kratos Digital Store is an e-commerce platform for games, designed to manage and distribute digital game products efficiently. The system is built with a modern tech stack, leveraging React for the frontend and PostgreSQL for data management. The backend uses Sequelize ORM in Node.js server to manage database interactions, with Redux Toolkit for state management and Redux Saga for handling asynchronous operations like user authentication.
 
 ### Key features include:

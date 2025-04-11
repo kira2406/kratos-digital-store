@@ -9,6 +9,9 @@ export const theme = createTheme({
     secondary: {
       main: '#FF9800', // Changed to orange for better contrast
     },
+    ashgray: {
+      main: "#A2A7A5"
+    },
     background: {
       default: '#0f0e11',
       paper: '#1c1b20', // Darker grey for better contrast
