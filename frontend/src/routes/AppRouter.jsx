@@ -6,6 +6,7 @@ import Register from '../components/register/Register';
 import Login from '../components/Login/Login';
 import Layout from '../components/Layout/Layout';
 import { Container } from '@mui/material';
+import GameDetailsPage from '../pages/GameDetailsPage/GameDetailsPage';
 
 const router = createBrowserRouter([
     {
@@ -17,7 +18,10 @@ const router = createBrowserRouter([
             },
             {
                 path:"/profile", element: <Profile />
-            }
+            },            
+            {
+                path:"/games/:game_id", element: <GameDetailsPage />
+            },
         ]
     },
     {
@@ -25,7 +29,8 @@ const router = createBrowserRouter([
     },
     {
         path:"/register", element: <Register />
-    }
+    },
+
 ])
 const AppRouter = () => {
   return (

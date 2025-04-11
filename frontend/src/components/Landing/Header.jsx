@@ -2,6 +2,7 @@ import React from 'react'
 import { Box, Paper, Typography } from '@mui/material'
 import Carousel from 'react-material-ui-carousel';
 import useFeaturedGames from '../../hooks/useFeaturedGames';
+import { Link } from 'react-router-dom';
 
 
 const Header = () => {
@@ -21,6 +22,8 @@ const Header = () => {
             <Carousel>
             {featuredGames.map((game, index) => (
               <Paper
+              component={Link}
+              to={`/games/${game?._id}`}
               key={index}
               sx={{height: "60vh",
                 padding: "20px",

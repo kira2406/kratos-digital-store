@@ -2,7 +2,7 @@ import React from "react";
 import AppBar from "@mui/material/AppBar";
 import { alpha, Box, Button, InputBase, styled, Toolbar, Typography } from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "../../selectors/authSelectors";
 import {logoutRequest } from "../../reducers/auth/authSlice";
@@ -73,13 +73,39 @@ const Navbar = () => {
   return (
     <AppBar color="black">
       <Toolbar>
-      <Typography variant="h4" component="div" sx={{ mr: 2 }} >
+      <Typography
+      component={Link}
+      to="/"
+      variant="h4" sx={{
+    mr: 2,
+    textDecoration: 'none',
+    color: 'secondary.main',
+    '&:visited': {
+      color: 'secondary.main',
+    },
+  }} >
           Kratos
         </Typography>
-        <Typography variant="h6" component="div" sx={{ mr: 2 }}>
+        <Typography variant="h6" component={Link}
+        sx={{
+          mr: 2,
+          textDecoration: 'none',
+          color: 'white',
+          '&:visited': {
+            color: 'white',
+          },
+        }}>
           Home
         </Typography>
-        <Typography variant="h6" component="div" sx={{ mr: 2 }}>
+        <Typography variant="h6" component={Link}
+        sx={{
+          mr: 2,
+          textDecoration: 'none',
+          color: 'white',
+          '&:visited': {
+            color: 'white',
+          },
+        }}>
           Categories
         </Typography>
         <Search >
