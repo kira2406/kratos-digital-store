@@ -2,7 +2,7 @@ import React from 'react'
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Landing from '../pages/Landing/Landing';
 import Profile from '../pages/Profile/Profile';
-import Register from '../components/register/Register';
+import Register from '../components/Register/Register';
 import Login from '../components/Login/Login';
 import Layout from '../components/Layout/Layout';
 import { Container } from '@mui/material';
