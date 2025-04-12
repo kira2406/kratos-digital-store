@@ -4,11 +4,22 @@ import React from "react";
 import MicrosoftIcon from "@mui/icons-material/Microsoft";
 import AppleIcon from "@mui/icons-material/Apple";
 import ComputerIcon from "@mui/icons-material/Computer";
+import { useNavigate } from "react-router-dom";
 
 const GameLibraryCard = ({ game, loading }) => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    // You can do anything here before navigation
+    navigate(`/games/${game?._id}`);
+  };
+
   return (
     <Box
+    onClick={handleClick}
       sx={{
+        cursor: 'pointer',
+        textDecoration: 'none',
         display: "flex",
         flexDirection: "row",
         backgroundColor: "#1c1c1c",
@@ -109,6 +120,7 @@ const GameLibraryCard = ({ game, loading }) => {
 
 GameLibraryCard.propTypes = {
   game: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     header_image: PropTypes.string.isRequired,
     categories: PropTypes.array.isRequired,
