@@ -67,7 +67,7 @@ jobs:
                   -var="repo_name=$REPO_NAME" \
                   -var="mongodb_uri=$MONGODB_URI" \
                   -var="firebase_service_account=$FIREBASE_SERVICE_ACCOUNT" \
-                  -var="firebase_api_key=$FIREBASE_API_KEY"
+                  -var="firebase_api_key=$FIREBASE_API_KEY" \
                   -var="firebase_auth_domain=$FIREBASE_AUTH_DOMAIN" \
                   -var="firebase_project_id=$FIREBASE_PROJECT_ID" \
                   -var="firebase_storage_bucket=$FIREBASE_STORAGE_BUCKET" \
