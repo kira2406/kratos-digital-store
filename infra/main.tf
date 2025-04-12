@@ -24,6 +24,10 @@ resource "google_cloud_run_service" "backend" {
             value = var.firebase_service_account
           }
           env {
+            name = "FIREBASE_API_KEY"
+            value = var.firebase_api_key
+          }
+          env {
             name = "FIREBASE_AUTH_DOMAIN"
             value = var.firebase_auth_domain
           }
