@@ -1,11 +1,18 @@
-name: Deploy Node.js to GCP
+name: Deploy Kratos Backend Node.js to GCP
 on:
     push:
         branches:
-            - master
+          - master
+        paths:
+          - 'backend/**'
+          - 'infra/**'  
     pull_request:
         branches:
-            - master
+          - master
+        paths:
+          - 'backend/**'
+          - 'infra/**'  
+        
 
 jobs:
     deploy:
