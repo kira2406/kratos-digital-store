@@ -50,6 +50,11 @@ jobs:
                 docker build -t $REGION-docker.pkg.dev/$PROJECT_ID/$REPO_NAME/$IMAGE_NAME ./backend
                 docker push $REGION-docker.pkg.dev/$PROJECT_ID/$REPO_NAME/$IMAGE_NAME
 
+            - name: Set up Terraform
+              uses: hashicorp/setup-terraform@v2
+              with:
+                terraform_version: 'latest'
+
             - name: Terraform Init & Apply
               working-directory: ./infra
               run: |
