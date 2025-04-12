@@ -1,8 +1,8 @@
 # kratos-digital-store
 
 <p align="center">
-  <img src="images/kratos_landing.png" alt="Kratos Landing Page" width="600"/>
-  <img src="images/kratos_landing2.png" alt="Kratos Landing Page 2" width="600"/>
+  <img src="images/kratos_landing.png" alt="Kratos Landing Page" width="300"/>
+  <img src="images/kratos_landing2.png" alt="Kratos Landing Page 2" width="300"/>
 </p>
 
 Kratos Digital Store is an e-commerce platform for games, designed to manage and distribute digital game products efficiently. The system is built with a modern tech stack, leveraging React for the frontend and PostgreSQL for data management. The backend uses Sequelize ORM in Node.js server to manage database interactions, with Redux Toolkit for state management and Redux Saga for handling asynchronous operations like user authentication.
@@ -17,8 +17,8 @@ Kratos Digital Store is an e-commerce platform for games, designed to manage and
 # Backend CI/CD using Github actions + Deployment using Terraform
 
 <p align="center">
-  <img src="images/backend_cicd.png" alt="Backend CI/CD" width="375"/>
-  <img src="images/backend_cicd_2.png" alt="Deployment using Terraform" width="600"/>
+  <img src="images/backend_cicd.png" alt="Backend CI/CD" width="250"/>
+  <img src="images/backend_cicd_2.png" alt="Deployment using Terraform" width="400"/>
 </p>
 
 # Current Pipeline
