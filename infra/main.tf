@@ -10,7 +10,7 @@ resource "google_cloud_run_service" "backend" {
     template {
       spec {
         containers {
-          image = "${var.region}-docker.pkg.dev/${var.project_id}/${var.repo_name}/${var.image_name}"
+          image = "${var.region}-docker.pkg.dev/${var.project_id}/${var.repo_name}/${var.image_name}:latest"
           ports {
             container_port = 3000
           }
