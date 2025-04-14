@@ -33,6 +33,9 @@ export const theme = createTheme({
     body1: {
       fontSize: '1rem',
     },
+    body2: {
+      fontSize: '1rem',
+    },
     button: {
       textTransform: "none", // Prevents uppercase buttons
     }

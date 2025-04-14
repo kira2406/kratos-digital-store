@@ -7,6 +7,7 @@ const gameController = {
         const limit = parseInt(req.query.limit) || 20;
         const genres = req.query.genres || ''
         const categories = req.query.categories || ''
+        const game_id = req.query.game_id || ''
 
         const genreList = genres ? genres.split(',') : [];
         const categoriesList = categories ? categories.split(',') : [];
@@ -15,7 +16,7 @@ const gameController = {
         const skip = (page - 1) * limit;
 
         try {
-            const {games, total} = await gameService.fetchGames({skip, limit, genreList, categoriesList})
+            const {games, total} = await gameService.fetchGames({skip, limit, genreList, categoriesList, game_id})
         
             res.status(200).json({
               success: true,
