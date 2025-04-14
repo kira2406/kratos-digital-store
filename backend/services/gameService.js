@@ -52,9 +52,15 @@ const gameService = {
             throw error;
         }
     },
-    fetchGames: async ({skip, limit, genreList, categoriesList}) => {
+    fetchGames: async ({skip, limit, genreList, categoriesList, game_id}) => {
         try{
             const filter = {};
+
+            if (game_id) {
+                const game = await Game.findById(game_id);
+                if (!game) return { games: [], total: 0 };
+                return { games: [game], total: 1 };
+            }
 
             if (genreList.length > 0) {
                 filter.genres = { $in: genreList };
