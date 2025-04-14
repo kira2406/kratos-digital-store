@@ -12,3 +12,10 @@ export const selectGamesByPage = createSelector(
     return gameIds.map(id => gamesState.games[id]).filter(Boolean);
   }
 );
+
+export const selectGameById = createSelector(
+  [selectGamesState, (_, gameId) => gameId], // Get gameId dynamically from the props
+  (gamesState, gameId) => {
+    return gamesState.games[gameId] || null;  // Return game if found, else null
+  }
+);

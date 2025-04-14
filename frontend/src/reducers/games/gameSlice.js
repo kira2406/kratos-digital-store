@@ -5,8 +5,10 @@ const initialState = {
     games: {},
     pageMap: {},
     loading: false,
+    featuredGameLoaded: false,
     featuredGameLoading: false,
     featuredGameError: false,
+    gameLibraryLoaded: false,
     totalPages: 0,
     error: ""
 }
@@ -35,6 +37,7 @@ const gameSlice = createSlice({
         featuredGamesSuccess: (state, action) => {
             state.featuredGameLoading = false
             state.featuredGameError = ""
+            state.featuredGameLoaded = true
             const gamesArray = action.payload.games
             
             gamesArray.forEach(game => {
@@ -52,8 +55,7 @@ const gameSlice = createSlice({
         gamesLibrarySuccess: (state, action) => {
             state.loading = false
             state.error = ""
-            const gamesArray = action.payload.games
-
+            const gamesArray = action.payload.data.games
             const pagesArray = []
             
             gamesArray.forEach(game => {
@@ -62,13 +64,14 @@ const gameSlice = createSlice({
                 }
                 pagesArray.push(game._id);
             });
-            state.pageMap[action.payload.page] = pagesArray
-            state.totalPages = action.payload.totalPages
+            state.pageMap[action.payload.data.page] = pagesArray
+            state.totalPages = action.payload.data.totalPages
+            state.gameLibraryLoaded = action.payload.paginated
         },
         gamesLibraryFailure: (state, action) => {
             state.loading = false
             state.error = action.payload
-        },
+        }
     }
 })
 

@@ -11,10 +11,11 @@ const useGamesLibrary = (page, genreList = [], categoriesList = []) => {
   const loading = useSelector(state => state.gamesData.loading);
   const error = useSelector(state => state.gamesData.error);
   const totalPages = useSelector(state => state.gamesData.totalPages);
+  const gameLibraryLoaded = useSelector(state => state.gamesData.gameLibraryLoaded)
 
   useEffect(() => {
-    if (!pageMap || !pageMap[page]) {
-      dispatch(gamesLibraryRequest({ page, genreList, categoriesList }));
+    if (!pageMap || !pageMap[page] || !gameLibraryLoaded) {
+      dispatch(gamesLibraryRequest({ page, genreList, categoriesList, game_id: '' }));
     }
   }, [page, pageMap, dispatch]);
 

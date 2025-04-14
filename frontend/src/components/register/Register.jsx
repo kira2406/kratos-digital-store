@@ -60,7 +60,6 @@ const Register = () => {
       setEmailError(true)
       setEmailErrorText("Email is required")
     }
-    console.log(usernameError,passwordError, emailError)
     if (!hasError){
       handleRegister()
     }

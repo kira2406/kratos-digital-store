@@ -5,10 +5,10 @@ import { featuredGamesRequest } from '../reducers/games/gameSlice';
 const useFeaturedGames = () => {
     const dispatch = useDispatch();
 
-    const { games, featuredGameLoading, featuredGameError } = useSelector(state => state.gamesData);
+    const { games, featuredGameLoaded, featuredGameLoading, featuredGameError } = useSelector(state => state.gamesData);
 
     useEffect(() => {
-        if (!Object.keys(games).length) {
+        if (!featuredGameLoaded) {
             dispatch(featuredGamesRequest());
         }
     }, [dispatch, games]);

@@ -22,14 +22,19 @@ function* getFeaturedGamesSaga(){
 
 function* getGamesLibrarySaga(action){
     try{
-        const {page, genreList, categoriesList} = action.payload
-        const response = yield call(axios.get,`${API_URL}/api/game?page=${page}&limit=20&genres=${genreList}&categories=${categoriesList}`)
-
+        const {page, genreList, categoriesList, game_id} = action.payload
+        const response = yield call(axios.get,`${API_URL}/api/game?page=${page}&limit=20&genres=${genreList}&categories=${categoriesList}&game_id=${game_id}`)
         if (!response?.data?.success){
             throw new Error("Something went wrong")
         }
+        
+        const stateUpdate = {
+            data: response?.data,
+            paginated: page !== '' || false
+            
+        }
 
-        yield put(gamesLibrarySuccess(response?.data))
+        yield put(gamesLibrarySuccess(stateUpdate))
 
     } catch(error){
         yield put(gamesLibraryFailure(error?.message || 'Failed to retrieve game data'))
