@@ -1,8 +1,9 @@
 import axios from "axios";
+const API_URL = import.meta.env.VITE_KRATOS_BACKEND_URL;
 
 export const getTopFiveGamesApi = async (payload) => {
     try{
-        const response = await axios.get('http://localhost:3000/api/game/getTopFiveGames',payload)
+        const response = await axios.get(`${API_URL}/api/game/getTopFiveGames`,payload)
 
         return response.data
     } catch(error){

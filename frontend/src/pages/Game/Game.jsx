@@ -3,6 +3,7 @@ import GameData from '../../components/Game/GameData'
 import SalesChart from '../../components/SalesChart/SalesChart'
 import { Box, CircularProgress, Container, Typography } from '@mui/material'
 import axios from 'axios'
+const API_URL = import.meta.env.VITE_KRATOS_BACKEND_URL;
 
 const Game = () => {
     const [actualSalesData, setActualSalesData] = useState([]);
@@ -14,7 +15,7 @@ const Game = () => {
         // Fetch sales data from your backend API
         const fetchSalesData = async () => {
             try {
-                const response = await axios.post('http://localhost:3000/api/publisher/getSalesData', {
+                const response = await axios.post(`${API_URL}/api/publisher/getSalesData`, {
                     game_id: "70c5228e-704d-43e9-b29f-0a3f8174ba72", // Pass game_id dynamically
                 });
                 setActualSalesData(response.data.actualSales); // Adjust based on your API response structure
