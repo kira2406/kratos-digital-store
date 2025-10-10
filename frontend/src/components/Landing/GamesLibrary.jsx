@@ -9,8 +9,8 @@ const GamesLibrary = () => {
 
   return (
     <Box sx={{ mt: 2 }}>
-      <Typography variant="h6" sx={{ color: 'white', margin: 2 }}>
-        POPULAR GAMES AND NEW RELEASES
+      <Typography variant="h4" sx={{ color: 'white', margin: 2, fontFamily: "UnifrakturMaguntia" }}>
+        Popular Games and New Releases
       </Typography>
       <Pagination
         count={totalPages}

@@ -29,8 +29,8 @@ const responsive = {
 const BrowseByCategories = () => {
   return (
     <Box sx={{ mt: 2 }}>
-      <Typography variant="h6" sx={{ color: 'white', margin: 2 }}>
-        BROWSE BY CATEGORIES
+      <Typography variant="h3" sx={{ color: 'white', margin: 2, fontFamily: "UnifrakturMaguntia" }}>
+        Browse By Categories
       </Typography>
 
       <Carousel

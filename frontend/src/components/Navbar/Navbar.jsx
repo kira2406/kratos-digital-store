@@ -76,13 +76,14 @@ const Navbar = () => {
       <Typography
       component={Link}
       to="/"
-      variant="h4" sx={{
+      variant="h3" sx={{
     mr: 2,
     textDecoration: 'none',
     color: 'secondary.main',
     '&:visited': {
       color: 'secondary.main',
     },
+    fontFamily: "UnifrakturMaguntia",
   }} >
           Kratos
         </Typography>

@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
 import { useGameMedia } from '../../hooks/useGameMedia'
 import { gamesLibraryRequest } from '../../reducers/games/gameSlice'
+import LanguageIcon from '@mui/icons-material/Language';
+import SupportAgentIcon from '@mui/icons-material/SupportAgent';
 
 const GameDetailsPage = () => {
     const dispatch = useDispatch()
@@ -198,12 +200,27 @@ const GameDetailsPage = () => {
       </Box>
 
       <Stack direction="row" spacing={3}>
-        <Link href={game.website} target="_blank" underline="hover" color="info.main">
-          Official Website
-        </Link>
-        <Link href={game.support_url} target="_blank" underline="hover" color="info.main">
-          Support Page
-        </Link>
+        <Chip
+        label="Website"
+        component="a"
+        href={game.website}
+        target="_blank"
+        rel="noopener noreferrer"
+        icon={<LanguageIcon />}
+        variant="outlined"
+        clickable
+      />
+      <Chip
+        label="Support"
+        component="a"
+        href={game.support_url}
+        target="_blank"
+        rel="noopener noreferrer"
+        icon={<SupportAgentIcon />}
+        variant="outlined"
+        color="secondary"
+        clickable
+      />
       </Stack>
       </Grid2>
 
