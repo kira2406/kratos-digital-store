@@ -1,0 +1,109 @@
+.game-card {
+  background-color: var(--game-card-bg) !important;
+  color: var(--game-card-text) !important;
+  border-radius: 16px !important;
+  box-shadow: 3 !important;
+  width: 100%;
+}
+
+.game-card-content {
+  padding-bottom: 8px !important;
+}
+
+.game-card-title {
+  color: var(--game-card-text);
+  line-height: 1.2;
+  word-break: break-word;
+}
+
+.game-card-description {
+  color: var(--game-card-muted) !important;
+  line-height: 1.6;
+  word-break: break-word;
+}
+
+.game-card-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.game-card-rating-row,
+.game-card-verdict-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.game-card-label {
+  color: var(--game-card-text) !important;
+  font-weight: 500;
+}
+
+.game-card-verdict {
+  color: var(--game-card-text) !important;
+  font-size: 1.25rem !important;
+  font-weight: 600;
+  word-break: break-word;
+}
+
+.game-card-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 16px;
+  flex-wrap: wrap;
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+  .game-card-title {
+    font-size: 1.35rem !important;
+  }
+
+  .game-card-verdict {
+    font-size: 1.1rem !important;
+  }
+
+  .game-card-actions {
+    justify-content: flex-start;
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .game-card-content {
+    padding: 16px !important;
+  }
+
+  .game-card-title {
+    font-size: 1.2rem !important;
+  }
+
+  .game-card-description {
+    font-size: 0.9rem !important;
+  }
+
+  .game-card-rating-row,
+  .game-card-verdict-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .game-card-verdict {
+    font-size: 1rem !important;
+  }
+
+  .game-card-actions {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 16px;
+  }
+
+  .game-card-actions button {
+    width: 100%;
+  }
+}

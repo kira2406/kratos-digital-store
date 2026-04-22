@@ -1,0 +1,77 @@
+.games-library {
+  margin-top: 16px;
+  padding: 0 16px;
+}
+
+.games-library-title {
+  color: var(--games-library-text);
+  margin: 16px !important;
+  font-family: "UnifrakturMaguntia" !important;
+  text-align: left;
+  line-height: 1.2;
+}
+
+.games-library-pagination-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 16px 0;
+}
+
+.games-library-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.games-library-card-wrapper {
+  width: 100%;
+}
+
+/* Pagination text/icons */
+.games-library-pagination .MuiPaginationItem-root {
+  color: var(--games-library-pagination);
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+  .games-library {
+    padding: 0 12px;
+  }
+
+  .games-library-title {
+    margin: 12px 8px !important;
+    font-size: 2rem !important;
+  }
+
+  .games-library-list {
+    gap: 14px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .games-library {
+    margin-top: 12px;
+    padding: 0 8px;
+  }
+
+  .games-library-title {
+    margin: 12px 4px !important;
+    font-size: 1.5rem !important;
+    text-align: center;
+  }
+
+  .games-library-pagination-wrapper {
+    margin: 12px 0;
+  }
+
+  .games-library-pagination .MuiPagination-ul {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4px;
+  }
+
+  .games-library-list {
+    gap: 12px;
+  }
+}

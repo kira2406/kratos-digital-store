@@ -1,0 +1,158 @@
+.game-library-card {
+  cursor: pointer;
+  text-decoration: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  background-color: var(--card-bg);
+  color: var(--card-text);
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  margin-bottom: 8px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.game-library-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.32);
+}
+
+.game-library-card.loading {
+  cursor: default;
+}
+
+.game-library-card-image-wrapper {
+  flex-shrink: 0;
+}
+
+.game-library-card-image,
+.game-library-card-image-skeleton {
+  width: 200px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+  display: block;
+}
+
+.game-library-card-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.game-library-card-title {
+  font-weight: bold !important;
+  margin-bottom: 8px !important;
+  color: var(--card-text);
+  word-break: break-word;
+}
+
+.game-library-card-platforms {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+  color: var(--card-muted);
+}
+
+.game-library-card-genres {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.game-library-card-categories {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 4px;
+}
+
+.game-library-card-categories-text {
+  color: var(--card-muted) !important;
+  word-break: break-word;
+}
+
+.game-library-card-price-wrapper {
+  margin-left: 16px;
+  text-align: right;
+  flex-shrink: 0;
+  align-self: center;
+}
+
+.game-library-card-price {
+  font-weight: bold !important;
+  color: var(--card-price) !important;
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+  .game-library-card {
+    gap: 12px;
+    padding: 10px;
+  }
+
+  .game-library-card-image,
+  .game-library-card-image-skeleton {
+    width: 170px;
+    height: 90px;
+  }
+
+  .game-library-card-title {
+    font-size: 1.05rem !important;
+  }
+
+  .game-library-card-price {
+    font-size: 1.1rem !important;
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .game-library-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px;
+  }
+
+  .game-library-card-image-wrapper {
+    width: 100%;
+  }
+
+  .game-library-card-image,
+  .game-library-card-image-skeleton {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 2 / 1;
+  }
+
+  .game-library-card-content {
+    width: 100%;
+  }
+
+  .game-library-card-title {
+    font-size: 1rem !important;
+    margin-bottom: 6px !important;
+  }
+
+  .game-library-card-platforms {
+    margin-bottom: 6px;
+  }
+
+  .game-library-card-genres {
+    gap: 6px;
+    margin-bottom: 6px;
+  }
+
+  .game-library-card-price-wrapper {
+    width: 100%;
+    margin-left: 0;
+    text-align: left;
+    align-self: flex-start;
+  }
+
+  .game-library-card-price {
+    font-size: 1rem !important;
+  }
+}

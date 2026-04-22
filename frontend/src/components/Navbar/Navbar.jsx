@@ -1,130 +1,89 @@
 import React from "react";
 import AppBar from "@mui/material/AppBar";
-import { alpha, Box, Button, InputBase, styled, Toolbar, Typography } from "@mui/material";
-import SearchIcon from '@mui/icons-material/Search';
+import {
+  Button,
+  InputBase,
+  Toolbar,
+  Typography,
+  useTheme,
+} from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "../../selectors/authSelectors";
-import {logoutRequest } from "../../reducers/auth/authSlice";
+import { logoutRequest } from "../../reducers/auth/authSlice";
+import "./Navbar.css";
 
 const Navbar = () => {
-
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const currentuser = useSelector(selectUser);
+  const theme = useTheme();
 
-  const navigate = useNavigate()
-
-  const currentuser = useSelector(selectUser)
-
-  const handleLoginClick = () => {
-    navigate('/login')
-  }
-  const handleProfileClick = () => {
-    navigate('/profile')
-  }
+  const handleLoginClick = () => navigate("/login");
+  const handleProfileClick = () => navigate("/profile");
 
   const handleLogoutClick = () => {
-    dispatch(logoutRequest())
-    localStorage.removeItem("token")
-    navigate('/')
-  }
-
-  const Search = styled('div')(({ theme }) => ({
-    position: 'relative',
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: alpha(theme.palette.common.white, 0.15),
-    '&:hover': {
-      backgroundColor: alpha(theme.palette.common.white, 0.25),
-    },
-    marginLeft: 0,
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      marginLeft: theme.spacing(1),
-      width: 'auto',
-    },
-  }));
-  
-  const SearchIconWrapper = styled('div')(({ theme }) => ({
-    padding: theme.spacing(0, 2),
-    height: '100%',
-    position: 'absolute',
-    pointerEvents: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  }));
-  
-  const StyledInputBase = styled(InputBase)(({ theme }) => ({
-    color: 'inherit',
-    width: '100%',
-    '& .MuiInputBase-input': {
-      padding: theme.spacing(1, 1, 1, 0),
-      // vertical padding + font size from searchIcon
-      paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-      transition: theme.transitions.create('width'),
-      [theme.breakpoints.up('sm')]: {
-        width: '12ch',
-        '&:focus': {
-          width: '20ch',
-        },
-      },
-    },
-  }));
+    dispatch(logoutRequest());
+    localStorage.removeItem("token");
+    navigate("/");
+  };
 
   return (
-    <AppBar color="black">
-      <Toolbar>
-      <Typography
-      component={Link}
-      to="/"
-      variant="h3" sx={{
-    mr: 2,
-    textDecoration: 'none',
-    color: 'secondary.main',
-    '&:visited': {
-      color: 'secondary.main',
-    },
-    fontFamily: "UnifrakturMaguntia",
-  }} >
+    <AppBar
+      position="fixed"
+      className="navbar"
+      style={{
+        "--navbar-bg": theme.palette.common.black,
+        "--navbar-text": theme.palette.common.white,
+        "--navbar-accent": theme.palette.secondary.main,
+        "--search-bg": "rgba(255,255,255,0.15)",
+        "--search-bg-hover": "rgba(255,255,255,0.25)",
+      }}
+    >
+      <Toolbar className="toolbar">
+        <Typography component={Link} to="/" className="logo">
           Kratos
         </Typography>
-        <Typography variant="h6" component={Link}
-        sx={{
-          mr: 2,
-          textDecoration: 'none',
-          color: 'white',
-          '&:visited': {
-            color: 'white',
-          },
-        }}>
-          Home
-        </Typography>
-        <Typography variant="h6" component={Link}
-        sx={{
-          mr: 2,
-          textDecoration: 'none',
-          color: 'white',
-          '&:visited': {
-            color: 'white',
-          },
-        }}>
-          Categories
-        </Typography>
-        <Search >
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </Search>
-          <Box sx={{ flexGrow: 1 }} />
-          {currentuser ? 
-          <Box sx={{m:2}}>
-          <Button sx={{mr:1, ml:2}} color="primary" variant="contained" onClick={handleProfileClick}>Profile</Button>
-          <Button sx={{mr:1, ml:2}} color="primary" variant="contained" onClick={handleLogoutClick}>Logout</Button>
-          </Box>:
-          <Button color="primary" variant="contained" onClick={handleLoginClick}>Login</Button>}
+
+        <div className="nav-links">
+          <Link to="/" className="nav-link">
+            Home
+          </Link>
+          <Link to="/categories" className="nav-link">
+            Categories
+          </Link>
+        </div>
+
+        <div className="spacer" />
+
+        <div className="search">
+          <div className="search-icon">
+            <SearchIcon fontSize="small" />
+          </div>
+          <InputBase
+            placeholder="Search..."
+            inputProps={{ "aria-label": "search" }}
+            className="search-input"
+          />
+        </div>
+
+        {currentuser ? (
+          <div className="buttons">
+            <Button variant="contained" color="primary" onClick={handleProfileClick}>
+              Profile
+            </Button>
+            <Button variant="contained" color="primary" onClick={handleLogoutClick}>
+              Logout
+            </Button>
+          </div>
+        ) : (
+          <div className="buttons">
+            <Button variant="contained" color="primary" onClick={handleLoginClick}>
+              Login
+            </Button>
+          </div>
+        )}
       </Toolbar>
     </AppBar>
   );

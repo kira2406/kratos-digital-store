@@ -1,36 +1,59 @@
 import { Box, Pagination, Typography } from '@mui/material'
 import React, { useState } from 'react'
-import useGamesLibrary from '../../hooks/useGamesLibrary';
-import GameLibraryCard from './GameLibraryCard';
+import { useTheme } from '@mui/material/styles'
+import useGamesLibrary from '../../hooks/useGamesLibrary'
+import GameLibraryCard from './GameLibraryCard'
+import './GamesLibrary.css'
 
 const GamesLibrary = () => {
-  const [page, setPage] = useState(1);
-  const { games, loading, totalPages } = useGamesLibrary(page);
+  const [page, setPage] = useState(1)
+  const { games, loading, totalPages } = useGamesLibrary(page)
+  const theme = useTheme()
 
   return (
-    <Box sx={{ mt: 2 }}>
-      <Typography variant="h4" sx={{ color: 'white', margin: 2, fontFamily: "UnifrakturMaguntia" }}>
+    <Box
+      className="games-library"
+      style={{
+        '--games-library-text': theme.palette.common.white,
+        '--games-library-pagination': theme.palette.common.white,
+      }}
+    >
+      <Typography variant="h4" className="games-library-title">
         Popular Games and New Releases
       </Typography>
-      <Pagination
-        count={totalPages}
-        page={page}
-        onChange={(e, val) => setPage(val)}
-        sx={{ my: 2, display: 'flex', justifyContent: 'center' }}
-      />
-      {loading && Array.from({ length: 6 }).map((_, index) => (
-      <GameLibraryCard key={index} loading={true} />
-      ))}
-      <Box>
-      {games.map(game => (
-        <GameLibraryCard game={game} loading={loading} key={game._id} sx={{ mb: 2 }}/>
-      ))}
-      <Pagination
-        count={totalPages}
-        page={page}
-        onChange={(e, val) => setPage(val)}
-        sx={{ my: 2, display: 'flex', justifyContent: 'center' }}
-      />
+
+      <Box className="games-library-pagination-wrapper top">
+        <Pagination
+          count={totalPages}
+          page={page}
+          onChange={(e, val) => setPage(val)}
+          className="games-library-pagination"
+        />
+      </Box>
+
+      <Box className="games-library-list">
+        {loading &&
+          Array.from({ length: 6 }).map((_, index) => (
+            <Box key={index} className="games-library-card-wrapper">
+              <GameLibraryCard loading={true} />
+            </Box>
+          ))}
+
+        {!loading &&
+          games.map((game) => (
+            <Box key={game._id} className="games-library-card-wrapper">
+              <GameLibraryCard game={game} loading={false} />
+            </Box>
+          ))}
+      </Box>
+
+      <Box className="games-library-pagination-wrapper bottom">
+        <Pagination
+          count={totalPages}
+          page={page}
+          onChange={(e, val) => setPage(val)}
+          className="games-library-pagination"
+        />
       </Box>
     </Box>
   )

@@ -1,0 +1,153 @@
+.game-details-page {
+  padding: 32px;
+  color: var(--gd-text);
+  margin: 40px 0;
+}
+
+.game-details-top-header {
+  margin: 40px 0;
+}
+
+.game-details-title {
+  word-break: break-word;
+}
+
+.game-details-main-card {
+  padding: 40px;
+  border-radius: 20px !important;
+}
+
+.game-details-header-image {
+  border-radius: 8px;
+  margin-bottom: 16px;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.game-details-short-description {
+  margin-bottom: 16px !important;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: pre-line;
+  text-align: justify;
+}
+
+.game-details-main-media {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  display: block;
+}
+
+.game-details-thumbnails {
+  display: flex;
+  overflow-x: auto;
+  gap: 16px;
+  padding-bottom: 8px;
+}
+
+.game-details-thumb {
+  height: 80px;
+  cursor: pointer;
+  border-radius: 8px;
+  border: 2px solid transparent;
+  flex-shrink: 0;
+}
+
+.game-details-thumb.active {
+  border-color: var(--gd-primary);
+}
+
+.game-details-bottom {
+  margin: 40px 0;
+}
+
+.game-details-long-description {
+  white-space: pre-line;
+  text-align: justify;
+  margin-bottom: 16px !important;
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+  .game-details-page {
+    padding: 24px;
+  }
+
+  .game-details-top-header {
+    margin: 28px 0;
+  }
+
+  .game-details-main-card {
+    padding: 24px;
+  }
+
+  .game-details-title {
+    font-size: 2.3rem !important;
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .game-details-page {
+    padding: 12px;
+    margin: 20px 0;
+  }
+
+  .game-details-top-header {
+    margin: 20px 0;
+  }
+
+  .game-details-main-card {
+    padding: 14px;
+    border-radius: 14px !important;
+  }
+
+  .game-details-title {
+    font-size: 1.9rem !important;
+    line-height: 1.2;
+  }
+
+  .game-details-short-description,
+  .game-details-long-description {
+    text-align: left;
+  }
+
+  .game-details-price-age {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 8px !important;
+  }
+
+  .game-details-thumb {
+    height: 64px;
+  }
+
+  .game-details-stats {
+    flex-wrap: wrap;
+  }
+
+  .stats-divider {
+    display: none;
+  }
+
+  .platform-divider {
+    display: none;
+  }
+
+  .game-details-platforms {
+    flex-wrap: wrap;
+  }
+
+  .game-details-languages {
+    word-break: break-word;
+  }
+
+  .game-details-links {
+    flex-direction: column !important;
+    gap: 12px !important;
+  }
+}
